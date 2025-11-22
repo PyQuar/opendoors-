@@ -383,26 +383,65 @@ textarea {
 
 .partners {
   text-align: center;
+  padding-bottom: 60px;
 }
 
-.partner-row {
-  margin: 36px 0 16px;
+.sponsor-tier {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.sponsor-tier h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--slate);
+  margin-bottom: 20px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.partner-logos {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 40px;
 }
 
-.partner-row img {
-  max-width: 160px;
-  max-height: 70px;
+.partner-logos img {
   object-fit: contain;
-  filter: grayscale(10%);
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
 }
 
-.partner-note {
-  color: var(--slate);
-  font-size: 0.9rem;
+.partner-logos img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Tier Sizing */
+.tier-diamond .partner-logos img {
+  height: 100px;
+  max-width: 280px;
+}
+
+.tier-gold .partner-logos img {
+  height: 70px;
+  max-width: 200px;
+}
+
+.tier-silver .partner-logos img {
+  height: 55px;
+  max-width: 160px;
+}
+
+.tier-bronze .partner-logos img,
+.tier-community .partner-logos img {
+  height: 45px;
+  max-width: 140px;
 }
 
 a {
@@ -424,9 +463,15 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .partner-row {
+  .partner-logos {
     gap: 24px;
   }
+  
+  .tier-diamond .partner-logos img { height: 70px; }
+  .tier-gold .partner-logos img { height: 50px; }
+  .tier-silver .partner-logos img { height: 40px; }
+  .tier-bronze .partner-logos img,
+  .tier-community .partner-logos img { height: 35px; }
 
   .timeline-item::before {
     left: 6px;
