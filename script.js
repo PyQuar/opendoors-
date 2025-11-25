@@ -1,7 +1,5 @@
 const form = document.getElementById('registrationForm');
 const successMessage = document.getElementById('successMessage');
-
-// REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzkrHS7QYsSigrh5OTZ2ODQHMvg78bvqO6NyGrkVz3Jgsb5JUAAMi6fxLZpXNCU_hAiew/exec';
 
 function toggleSuccessMessage(text) {
@@ -12,12 +10,27 @@ function toggleSuccessMessage(text) {
 }
 
 if (form) {
+  // Prevent Enter (Return) from submitting the form when focused on inputs (allow Enter in TEXTAREA)
+  form.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  });
+
+  // Flag to avoid duplicated / simultaneous submissions
+  let isSubmitting = false;
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (isSubmitting) return; // ignore extra submits
+    isSubmitting = true;
 
     const submitBtn = form.querySelector('.submit-btn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+    }
 
     const formData = new FormData(form);
 
@@ -40,8 +53,18 @@ if (form) {
         alert('We could not submit your registration. Please try again.');
       })
       .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Registration';
+        isSubmitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Registration';
+        }
       });
   });
+
+  // Optional: If you use a custom button (type="button"), attach click to call submit
+  const customBtn = form.querySelector('.submit-btn[type="button"]');
+  if (customBtn) {
+    customBtn.addEventListener('click', () => form.requestSubmit());
+    // requestSubmit() triggers the submit event and respects validation
+  }
 }
