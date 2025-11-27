@@ -35,12 +35,16 @@ body {
 }
 
 header.hero {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 32px;
-  padding: 48px;
+  padding: 64px 24px;
   border-radius: 36px;
-  background: linear-gradient(135deg, rgba(7, 10, 43, 0.95), rgba(76, 43, 255, 0.92));
+  background: linear-gradient(135deg, rgba(7, 10, 43, 0.95), rgba(76, 43, 255, 0.85)), url('Photos/Banner%20forum.jpg');
+  background-size: cover;
+  background-position: center;
   color: #fff;
   overflow: hidden;
 }
@@ -48,7 +52,7 @@ header.hero {
 .forum-logo {
   width: 140px;
   max-width: 50%;
-  margin-bottom: 12px;
+  margin: 20px 0px 22px;
   filter: drop-shadow(0 8px 20px rgba(7, 10, 43, 0.35));
 }
 
@@ -73,7 +77,8 @@ header.hero {
 }
 
 .hero .lede {
-  margin: 18px 0 28px;
+  margin: 18px auto 28px;
+  max-width: 700px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 1.05rem;
 }
@@ -84,6 +89,7 @@ header.hero {
   margin: 0 0 28px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 24px;
 }
 
@@ -102,6 +108,7 @@ header.hero {
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   margin-bottom: 24px;
 }
@@ -141,6 +148,7 @@ header.hero {
   padding: 0;
   margin: 0;
   display: flex;
+  justify-content: center;
   gap: 32px;
   color: rgba(255, 255, 255, 0.85);
 }
